@@ -6,10 +6,12 @@
 #include <QJsonArray>
 
 class QJsonArray;
+class AddTaskDialog;
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 QT_END_NAMESPACE
 
@@ -25,8 +27,11 @@ public:
     void displayTasks(const QJsonArray &tasks);
 private slots:
     void on_addButton_clicked();
+    void on_deleteButton_clicked();
+    void on_editButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+    AddTaskDialog *addTaskDialog;
 };
 #endif // MAINWINDOW_H

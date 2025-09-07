@@ -70,7 +70,7 @@
      </font>
     </property>
     <property name="autoFillBackground">
-     <bool>true</bool>
+     <bool>false</bool>
     </property>
     <property name="text">
      <string>Add Task</string>
@@ -99,7 +99,7 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>250</y>
+      <y>230</y>
       <width>101</width>
       <height>51</height>
      </rect>
@@ -155,7 +155,7 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>160</y>
+      <y>130</y>
       <width>101</width>
       <height>51</height>
      </rect>
@@ -211,15 +211,15 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>30</y>
-      <width>141</width>
-      <height>41</height>
+      <y>20</y>
+      <width>151</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Ink Free</family>
-      <pointsize>16</pointsize>
+      <pointsize>20</pointsize>
      </font>
     </property>
     <property name="text">

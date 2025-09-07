@@ -11,9 +11,33 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Task Manager</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="addButton">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>240</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add Task</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="taskListWidget">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>20</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>

@@ -1,7 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "taskapiclient.h"
 #include <QMainWindow>
+#include <QJsonArray>
+
+class QJsonArray;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,6 +20,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    TaskAPIClient *APIClient;
+    void displayTasks(const QJsonArray &tasks);
+private slots:
+    void on_addButton_clicked();
 
 private:
     Ui::MainWindow *ui;

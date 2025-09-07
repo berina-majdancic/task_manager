@@ -11,6 +11,7 @@ public:
     TaskAPIClient(QObject *parent = nullptr);
 
     void fetchTasks();
+    void addTask(const QString &taskName, const QString &taskDescription);
     QNetworkAccessManager *manager;
 signals:
     void tasksReceived(QJsonArray tasks);

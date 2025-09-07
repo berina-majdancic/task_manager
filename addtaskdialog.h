@@ -22,6 +22,8 @@ public:
 
     const QString getTaskDescription();
 
+    void setTaskInfo(QString taskName, QString taskDescription);
+
 private:
     Ui::AddTaskDialog *ui;
 };

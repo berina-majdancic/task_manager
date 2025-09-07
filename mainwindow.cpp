@@ -29,16 +29,33 @@ void MainWindow::on_addButton_clicked()
         qDebug() << "New Task:" << taskName;
         APIClient->addTask(taskName, taskDescription);
     }
-    // TODO:Open a new window for typing task info
-    // TODO: Send new task to Django backend
 }
 void MainWindow::on_deleteButton_clicked()
 {
-    // TODO: Send task to delete to Django backend
+    QList taskList(ui->taskListWidget->selectedItems());
+    if (taskList.isEmpty())
+        return;
+
+    QListWidgetItem task = *taskList[0];
+    APIClient->deleteTask(task.data(Qt::UserRole + 2).value<QString>());
 }
 void MainWindow::on_editButton_clicked()
 {
-    // TODO: Send update task to Django backend
+    QList taskList(ui->taskListWidget->selectedItems());
+    if (taskList.isEmpty())
+        return;
+    QListWidgetItem task = *taskList[0];
+    AddTaskDialog dialog(this);
+    QString taskName = task.text();
+    QString taskDescription = task.data(Qt::UserRole).value<QString>();
+    QString taskId = task.data(Qt::UserRole + 2).value<QString>();
+
+    dialog.setTaskInfo(taskName, taskDescription);
+    dialog.setWindowTitle("Edit Task");
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        APIClient->editTask(taskId, dialog.getTaskName(), dialog.getTaskDescription());
+    }
 }
 void MainWindow::displayTasks(const QJsonArray &tasks)
 {
@@ -46,12 +63,19 @@ void MainWindow::displayTasks(const QJsonArray &tasks)
     for (const QJsonValue &taskVal : tasks)
     {
         QJsonObject task = taskVal.toObject();
+        QVariant idVariant = task["id"].toVariant();
+        QString id = idVariant.toString();
         QString title = task["title"].toString();
+        QString description = task["description"].toString();
         bool completed = task["completed"].toBool();
 
         QString itemText = title;
 
         QListWidgetItem *item = new QListWidgetItem(itemText);
+        item->setData(Qt::UserRole, description);
+        item->setData(Qt::UserRole + 1, completed);
+        item->setData(Qt::UserRole + 2, id);
+
         ui->taskListWidget->addItem(item);
     }
 }

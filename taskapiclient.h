@@ -13,6 +13,9 @@ public:
     void fetchTasks();
     void addTask(const QString &taskName, const QString &taskDescription);
     QNetworkAccessManager *manager;
+    void deleteTask(const QString &taskName);
+    void editTask(const QString &taskId, const QString &taskName, const QString &taskDescription);
+
 signals:
     void tasksReceived(QJsonArray tasks);
 };

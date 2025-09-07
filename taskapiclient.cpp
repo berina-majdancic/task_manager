@@ -55,3 +55,33 @@ void TaskAPIClient::addTask(const QString &taskName, const QString &taskDescript
         }
         reply->deleteLater(); });
 }
+
+void TaskAPIClient::editTask(const QString &taskID, const QString &taskName, const QString &taskDescription)
+{
+    QNetworkRequest request(QUrl(QString("http://127.0.0.1:8000/api/tasks/%1/").arg(taskID)));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    QJsonObject json;
+    json["title"] = taskName;
+    json["description"] = taskDescription;
+    json["completed"] = false;
+
+    QJsonDocument doc(json);
+    QByteArray data = doc.toJson();
+    QNetworkReply *reply = manager->put(request, data);
+
+    connect(reply, &QNetworkReply::finished, [this, reply]()
+            {
+            fetchTasks();
+        reply->deleteLater(); });
+}
+
+void TaskAPIClient::deleteTask(const QString &taskId)
+{
+    QNetworkRequest request(QUrl(QString("http://127.0.0.1:8000/api/tasks/%1/").arg(taskId)));
+
+    QNetworkReply *reply = manager->deleteResource(request);
+    connect(reply, &QNetworkReply::finished, [this, reply]()
+            {
+            fetchTasks();
+        reply->deleteLater(); });
+}
